@@ -14,6 +14,11 @@ public class MainMenu : MonoBehaviour
     public static string difficulty;
     [HideInInspector] public static int gridSize = 9;
 
+    private void Start()
+    {
+        slider.value = gridSize;
+    }
+
     private void Update()
     {
             sliderText.text = gridSize.ToString();

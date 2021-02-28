@@ -693,4 +693,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/AI.unity
-  playerPath: C:/Users/Ivan/Desktop/Unity/Builds/Snake2-game/Snake2.exe
+  playerPath: C:/Users/Ivan/Documents/GitHub/Snake2/Snake2.exe
