@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject snakePart;
     public GameObject gapFiller;
     public Text score;
+    public GameObject snakeHead;
 
     //VEŘEJNÉ PROMĚNNÉ
     [HideInInspector] public string direction = "left";
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public int gridSize;
     [HideInInspector] public int halfGridSize;
     [HideInInspector] public float timeBtwMoves;
+    [HideInInspector] public GameObject snakeHeadClone;
 
     //PRIVÁTNÍ PROMĚNNÉ
     private string lastDirection = "left";
@@ -70,26 +72,26 @@ public class PlayerController : MonoBehaviour
     {
         startPos = new Vector2(halfGridSize, halfGridSize);
         currentPos = startPos;
-        scoreTextColor = new Color(0.7921569f, 0.08235294f, 0.3176471f, 1f);
+        scoreTextColor = new Color(0.9176471f, 0.7686275f, 0.2078431f, 1f);
     }
 
     //OVLÁDÁNÍ (vstup hráče)
     void PlayerInput()
     {
         //"lastDirection" je tu aby se had nemohl na místě otočit o 180 a narazit sám do sebe
-        if (Input.GetKeyDown(KeyCode.A) && lastDirection != "right")
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && lastDirection != "right")
         {
             direction = "left";
         }
-        else if (Input.GetKeyDown(KeyCode.D) && lastDirection != "left")
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && lastDirection != "left")
         {
             direction = "right";
         }
-        else if (Input.GetKeyDown(KeyCode.W) && lastDirection != "down")
+        else if (Input.GetKeyDown(KeyCode.UpArrow) && lastDirection != "down")
         {
             direction = "up";
         }
-        else if (Input.GetKeyDown(KeyCode.S) && lastDirection != "up")
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && lastDirection != "up")
         {
             direction = "down";
         }
@@ -168,8 +170,14 @@ public class PlayerController : MonoBehaviour
     void Move(Vector2 directionVector)
     {
         //na pozici "directionVector" vytvoří další část hada a přidá ji do listu pozic jednotlivých článků
-        Instantiate(snakePart, directionVector, Quaternion.identity);
         currentPos = directionVector;
+        Instantiate(snakePart, currentPos, Quaternion.identity);
+
+        if (snakeHeadClone)
+        {
+            Destroy(snakeHeadClone);
+        }
+        snakeHeadClone = Instantiate(snakeHead, currentPos, Quaternion.identity);
         snakePosList.Insert(0, currentPos);
         lastDirection = direction;
 
@@ -197,6 +205,10 @@ public class PlayerController : MonoBehaviour
         if (gapPosList.Count > snakePosList.Count - 1 && gapPosList.Count > 0)
         {
             gapPosList.RemoveAt(0);
+        }
+        else if(gapPosList.Count == 0 && snakeHeadClone != null)
+        {
+            Destroy(snakeHeadClone);
         }
     }
 

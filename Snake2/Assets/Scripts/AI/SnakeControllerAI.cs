@@ -7,9 +7,11 @@ public class SnakeControllerAI : MonoBehaviour
 {
     //REFERENCE
     public GameObject snakePartAI;
+    public GameObject snakeHeadAI;
     public GameObject gapFillerAI;
     public GameObject food;
     public Transform background;
+    public Transform wall;
     public Camera cam;
     private PlayerController playerScript;
     private Pathfinding pathScript;
@@ -31,6 +33,7 @@ public class SnakeControllerAI : MonoBehaviour
     [HideInInspector] public bool isAliveAI = true;
     [HideInInspector] public Vector2 foodPos;
     [HideInInspector] public GameObject foodClone;
+    [HideInInspector] public GameObject headCloneAI;
     [HideInInspector] public bool foodIsSpawned = false;
     [HideInInspector] public List<Vector2> snakePosListAI = new List<Vector2>();
     [HideInInspector] public List<Vector2> gapPosListAI = new List<Vector2>();
@@ -95,11 +98,12 @@ public class SnakeControllerAI : MonoBehaviour
         //nastavení velikosti hracího pole
         halfGridSize = (gridSize - 1) / 2;
         background.localScale = new Vector3(gridSize, gridSize, 1);
-        cam.orthographicSize = gridSize / 2f;
+        wall.localScale = new Vector3(gridSize + .5f, gridSize + .5f, 1);
+        cam.orthographicSize = gridSize / 2f + 0.25f;
 
         startPosAI = new Vector2(-halfGridSize, -halfGridSize);
         currentPosAI = startPosAI;
-        scoreColorAI = new Color(0.9843137f, 0.3019608f, 0.2392157f, 1f);
+        scoreColorAI = new Color(0.1333333f, 0.5882353f, 0.1921569f, 1f);
         //rychlost pohybu podle dané obtížnosti
         switch (difficulty)
         {
@@ -312,12 +316,20 @@ public class SnakeControllerAI : MonoBehaviour
         }
     }
 
-    //POHNE S AI
+    //POHNE S AI ------ přepsat komentáře, upravit (to samé u hrače)
     void MoveAI(Vector2 directionVectorAI)
-    {   
-        //na dané pozici vytvoří další část hada a tuto pozici vloží na začátek listu pozic jednotlivých částí
-        Instantiate(snakePartAI, directionVectorAI, Quaternion.identity);
+    {
         currentPosAI = directionVectorAI;   //přiřadí novou pozici hlavy hada
+
+        //na dané pozici vytvoří další část hada a tuto pozici vloží na začátek listu pozic jednotlivých částí
+        Instantiate(snakePartAI, currentPosAI, Quaternion.identity);
+
+        if (headCloneAI)
+        {
+            Destroy(headCloneAI);
+        }
+
+        headCloneAI = Instantiate(snakeHeadAI, currentPosAI, Quaternion.identity);      // hlava se objevuje až když je had delší než 1
         snakePosListAI.Insert(0, currentPosAI);
 
         if (snakeLengthAI >= 2)
@@ -344,6 +356,10 @@ public class SnakeControllerAI : MonoBehaviour
         if (gapPosListAI.Count > snakePosListAI.Count - 1 && gapPosListAI.Count > 0)
         {
             gapPosListAI.RemoveAt(0);
+        }
+        else if(gapPosListAI.Count == 0 && headCloneAI != null)
+        {
+            Destroy(headCloneAI);
         }
     }
 
