@@ -345,7 +345,7 @@ MonoBehaviour:
     type: 3}
   gapFillerAI: {fileID: 8764124847118465826, guid: 0da55fab4167bb642bb59433fc9c22bc,
     type: 3}
-  food: {fileID: 1183461778073405580, guid: 513ae05ad028f894b888cc180c708d06, type: 3}
+  food: {fileID: 8434841995934736215, guid: 2414f4f4bbadadb4ca767d5e6537559e, type: 3}
   background: {fileID: 1446597152}
   wall: {fileID: 812318359}
   cam: {fileID: 519420031}
