@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour
         {
             gapPosList.RemoveAt(0);
         }
-        else if(gapPosList.Count == 0 && snakeHeadClone != null)
+        else if(gapPosList.Count == 0 && snakeLength != 1 && snakeHeadClone != null)
         {
             Destroy(snakeHeadClone);
         }

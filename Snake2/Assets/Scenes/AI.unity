@@ -341,7 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snakePartAI: {fileID: 7283021833354971406, guid: ddba0677b76b3ff4e82a089b2d748eec,
     type: 3}
-  snakeHeadAI: {fileID: 5759254612120820700, guid: 1d01851348653d842b1ca790606e45a9,
+  snakeHeadAI: {fileID: 5790823723630101590, guid: 0ae60fbdec9c0cc46bf79dc55576f7d1,
     type: 3}
   gapFillerAI: {fileID: 8764124847118465826, guid: 0da55fab4167bb642bb59433fc9c22bc,
     type: 3}
@@ -387,7 +387,7 @@ MonoBehaviour:
   gapFiller: {fileID: 8574005617471779197, guid: 008ac0f8ffb21f248a5afaba6ea8b190,
     type: 3}
   score: {fileID: 855960740}
-  snakeHead: {fileID: 9015664109866855659, guid: 90f46542518ddc44aa91db3d570a97b5,
+  snakeHead: {fileID: 7352445197056307221, guid: 510738df604c38145a9afa89c676b322,
     type: 3}
   direction: left
   currentPos: {x: 0, y: 0}

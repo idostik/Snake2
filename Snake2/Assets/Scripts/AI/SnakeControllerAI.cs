@@ -350,14 +350,14 @@ public class SnakeControllerAI : MonoBehaviour
         }
     }
 
-    //MAŽE POZICE JIŽ NEEXISTUJÍCÍCH VÝPLNÍ
+    //MAŽE POZICE JIŽ NEEXISTUJÍCÍCH VÝPLNÍ (a nakonec i hlavu)
     void ReduceGapListAI()
     {
         if (gapPosListAI.Count > snakePosListAI.Count - 1 && gapPosListAI.Count > 0)
         {
             gapPosListAI.RemoveAt(0);
         }
-        else if(gapPosListAI.Count == 0 && headCloneAI != null)
+        else if(gapPosListAI.Count == 0 && snakeLengthAI != 1 && headCloneAI != null)
         {
             Destroy(headCloneAI);
         }
