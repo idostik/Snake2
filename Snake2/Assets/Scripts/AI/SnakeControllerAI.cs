@@ -357,10 +357,6 @@ public class SnakeControllerAI : MonoBehaviour
         {
             gapPosListAI.RemoveAt(0);
         }
-        else if(gapPosListAI.Count == 0 && snakeLengthAI != 1 && headCloneAI != null)
-        {
-            Destroy(headCloneAI);
-        }
     }
 
     //VŠECHNY SOUSEDNÍ UZLE
@@ -688,6 +684,10 @@ public class SnakeControllerAI : MonoBehaviour
             {
                 elapsedTime -= Time.deltaTime;
             }
+        }
+        else if (headCloneAI)
+        {
+            Destroy(headCloneAI);
         }
     }
 

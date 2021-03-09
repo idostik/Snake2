@@ -206,10 +206,6 @@ public class PlayerController : MonoBehaviour
         {
             gapPosList.RemoveAt(0);
         }
-        else if(gapPosList.Count == 0 && snakeLength != 1 && snakeHeadClone != null)
-        {
-            Destroy(snakeHeadClone);
-        }
     }
 
     //POSTUPNĚ ODSTRANÍ HADA
@@ -226,6 +222,10 @@ public class PlayerController : MonoBehaviour
             {
                 elapsedTime -= Time.deltaTime;
             }
+        }
+        else if (snakeHeadClone)
+        {
+            Destroy(snakeHeadClone);
         }
     }
 
