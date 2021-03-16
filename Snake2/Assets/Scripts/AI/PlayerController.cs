@@ -172,14 +172,7 @@ public class PlayerController : MonoBehaviour
         //na pozici "directionVector" vytvoří další část hada a přidá ji do listu pozic jednotlivých článků
         currentPos = directionVector;
         Instantiate(snakePart, currentPos, Quaternion.identity);
-
-        if (snakeHeadClone)
-        {
-            Destroy(snakeHeadClone);
-        }
-        snakeHeadClone = Instantiate(snakeHead, currentPos, Quaternion.identity);
         snakePosList.Insert(0, currentPos);
-        lastDirection = direction;
 
         //mezi jednotlivé články přidá výplň, aby byl had přehlednější
         if (snakeLength >= 2)
@@ -188,6 +181,14 @@ public class PlayerController : MonoBehaviour
             Instantiate(gapFiller, gapPos, Quaternion.identity);
             gapPosList.Add(gapPos);
         }
+
+        //vytvoří nový obličej hada a starý odstraní
+        if (snakeHeadClone)
+        {
+            Destroy(snakeHeadClone);
+        }
+        snakeHeadClone = Instantiate(snakeHead, currentPos, Quaternion.identity);
+        lastDirection = direction;
     }
 
     //ZKRÁTÍ LIST POZIC ČLÁNKŮ

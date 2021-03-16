@@ -58,7 +58,7 @@ public class Pathfinding : MonoBehaviour
 
                 //vzdálenost k sousednímu uzlu je vzdálenost k aktuálnímu uzlu + 1 (protože sousední uzly jsou od sebe vzdáleny o 1)
                 int newMovementCostToNeighbour = currentNode.gCost + 1;
-                //pokud je nová vzdálenost od počátečního uzlu ("gCost") kratší než předchozí 
+                //pokud je nová vzdálenost od počátečního uzlu ("gCost") blíže než předchozí 
                 //nebo pokud sousední uzel není ve skupině nevyhodnocených uzlů
                 if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                 {

@@ -88,6 +88,10 @@ public class SnakeControllerAI : MonoBehaviour
         }
         ShowScoreAI();
         //Debug.Log(Mathf.Round(1.0f / Time.deltaTime));
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Break();
+        }
     }
 
     //PŘIŘAZENÍ PROMĚNNÝCH PŘED ZAČÁTKEM HRY
@@ -254,12 +258,12 @@ public class SnakeControllerAI : MonoBehaviour
         }
 
         //smrt kvůli výraznému rozdílu velikostí (kdyby se neřešila velikost, hráč by mohl zůstat malý a počkat až AI samo nabourá)
-        if (playerScript.snakeLength - snakeLengthAI > maxLengthDifference)
+        if (playerScript.snakeLength - snakeLengthAI >= maxLengthDifference)
         {
             isAliveAI = false;
             GameOver(true);
         }
-        else if (snakeLengthAI - playerScript.snakeLength > maxLengthDifference)
+        else if (snakeLengthAI - playerScript.snakeLength >= maxLengthDifference)
         {
             playerScript.isAlive = false;
             GameOver(false);
@@ -316,21 +320,19 @@ public class SnakeControllerAI : MonoBehaviour
         }
     }
 
-    //POHNE S AI ------ přepsat komentáře, upravit (to samé u hrače)
+    //POHNE S AI
     void MoveAI(Vector2 directionVectorAI)
     {
         currentPosAI = directionVectorAI;   //přiřadí novou pozici hlavy hada
-
         //na dané pozici vytvoří další část hada a tuto pozici vloží na začátek listu pozic jednotlivých částí
         Instantiate(snakePartAI, currentPosAI, Quaternion.identity);
-
+        snakePosListAI.Insert(0, currentPosAI);
+        //zničí starý obličej hada a na nový článek ho přidá
         if (headCloneAI)
         {
             Destroy(headCloneAI);
         }
-
-        headCloneAI = Instantiate(snakeHeadAI, currentPosAI, Quaternion.identity);      // hlava se objevuje až když je had delší než 1
-        snakePosListAI.Insert(0, currentPosAI);
+        headCloneAI = Instantiate(snakeHeadAI, currentPosAI, Quaternion.identity);
 
         if (snakeLengthAI >= 2)
         {   
@@ -542,7 +544,6 @@ public class SnakeControllerAI : MonoBehaviour
                     maxIndex = neighbourIndex;
                     exitNode = n;
                 }
-
             }
         }
         return exitNode;
@@ -782,7 +783,7 @@ public class SnakeControllerAI : MonoBehaviour
                     }
                 }
 
-                Gizmos.DrawCube(node.worldPosition, Vector3.one * 0.9f);
+                Gizmos.DrawCube(node.worldPosition, Vector3.one * 0.5f);
             }
         }
     }
