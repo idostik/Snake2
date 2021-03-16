@@ -450,10 +450,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player starts in the top right corner and moves with arrows. You get bigger
-    every time you pick up food. You lose if you colide with yourself, enemy or wall
-    or if you are shorter than enemy by more than 10 points. The goal of the game
-    is to make your enemy crash.
+  m_Text: You start in the top right corner and move with arrows. You get bigger
+    every time you pick up food. The goal of the game is to make your enemy crash
+    and to be as long as possible. You lose if you crash or if you are shorter than
+    the enemy snake by 10 points.
 --- !u!222 &308530018
 CanvasRenderer:
   m_ObjectHideFlags: 0
